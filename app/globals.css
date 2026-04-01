@@ -1,0 +1,329 @@
+@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cursive {
+  font-family: "Cedarville Cursive", cursive;
+}
+.Welcome-text {
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.4)
+    ),
+    linear-gradient(90.01deg, #e59cff 0.01%, #ba9cff 50.01%, #9cb2ff 100%);
+  background-blend-mode: normal, screen;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.Welcome-box {
+  isolation: isolate;
+  overflow: hidden;
+  align-items: center;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-radius: 32px;
+  box-shadow: inset 0 -7px 11px #a48fff1f;
+  display: flex;
+
+  position: relative;
+  width: -moz-max-content;
+  width: max-content;
+  transition: 0.45s cubic-bezier(0.6, 0.6, 0, 1) box-shadow;
+}
+
+.button-primary {
+  background: linear-gradient(
+      180deg,
+      rgba(60, 8, 126, 0) 0%,
+      rgba(60, 8, 126, 0.32) 100%
+    ),
+    rgba(113, 47, 255, 0.12);
+  box-shadow: inset 0 0 12px #bf97ff3d;
+}
+.button-primary:hover {
+  background: linear-gradient(
+      180deg,
+      rgba(60, 8, 126, 0) 0%,
+      rgba(60, 8, 126, 0.42) 100%
+    ),
+    rgba(113, 47, 255, 0.24);
+  box-shadow: inset 0 0 12px #bf97ff70;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+:root {
+  --bg-0: 248 250 252; /* slate-50 */
+  --bg-1: 255 255 255;
+  --card: 255 255 255;
+  --border: 226 232 240; /* slate-200 */
+  --text: 15 23 42; /* slate-900 */
+  --muted: 71 85 105; /* slate-600 */
+
+  /* neon palette */
+  --neon-g: 34 197 94; /* green */
+  --neon-c: 34 211 238; /* cyan */
+  --neon-b: 59 130 246; /* blue */
+}
+
+html.dark {
+  --bg-0: 3 0 20;
+  --bg-1: 7 3 28;
+  --card: 10 6 20;
+  --border: 255 255 255;
+  --text: 243 244 246;
+  --muted: 203 213 225;
+}
+
+/* Light mode: single, consistent accent color */
+html.light {
+  --neon-g: 16 185 129; /* emerald-500 */
+  --neon-c: 16 185 129;
+  --neon-b: 16 185 129;
+}
+
+body {
+  background:
+    radial-gradient(900px 600px at 50% -10%, rgba(var(--neon-g) / 0.18), transparent 55%),
+    radial-gradient(800px 520px at 110% 25%, rgba(var(--neon-c) / 0.16), transparent 55%),
+    radial-gradient(900px 620px at -10% 85%, rgba(var(--neon-b) / 0.14), transparent 55%),
+    linear-gradient(180deg, rgb(var(--bg-1)), rgb(var(--bg-0)));
+}
+
+html.dark body {
+  color: #d8d8e0;
+  background-color: #0c0b12;
+}
+
+/* Premium depth (subtle vignette) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(900px 520px at 50% 20%, rgba(255, 255, 255, 0.05), transparent 60%),
+    radial-gradient(900px 700px at 50% 120%, rgba(0, 0, 0, 0.35), transparent 55%),
+    radial-gradient(1100px 900px at -10% 50%, rgba(0, 0, 0, 0.35), transparent 55%),
+    radial-gradient(1100px 900px at 110% 50%, rgba(0, 0, 0, 0.35), transparent 55%);
+  opacity: 0.9;
+}
+
+html.light body::before {
+  opacity: 0.35;
+}
+
+::selection {
+  color: #0c0b12;
+  background-color: #f7e295;
+}
+
+.brand-gradient-text {
+  background: linear-gradient(90deg, rgb(var(--neon-g)), rgb(var(--neon-c)), rgb(var(--neon-b)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-button {
+  background: linear-gradient(90deg, rgba(var(--neon-g) / 1), rgba(var(--neon-c) / 1));
+  color: #07110a;
+}
+
+.brand-button:hover {
+  filter: brightness(1.03);
+}
+
+.nav-link-minimal {
+  position: relative;
+}
+.nav-link-minimal::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--neon-g) / 1), rgba(var(--neon-c) / 1));
+  transition: width 280ms ease;
+}
+.nav-link-minimal:hover::after,
+.nav-link-minimal:focus-visible::after {
+  width: 100%;
+}
+
+/* Subtle media hover treatment (premium, non-distracting) */
+.media-soft {
+  filter: saturate(0.96) contrast(1.02);
+  transition: transform 600ms ease, filter 600ms ease, opacity 600ms ease;
+}
+.group:hover .media-soft {
+  filter: saturate(1) contrast(1.06);
+  transform: scale(1.02);
+}
+
+/* AI feel: slow scanline on glass panels */
+.ai-scanline {
+  position: absolute;
+  inset: -30%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--neon-c) / 0.16) 35%,
+    rgba(var(--neon-g) / 0.18) 50%,
+    rgba(var(--neon-c) / 0.16) 65%,
+    transparent 100%
+  );
+  transform: translateX(-60%);
+  animation: ai-scan 10s linear infinite;
+  filter: blur(10px);
+  opacity: 0.6;
+}
+
+@keyframes ai-scan {
+  0% {
+    transform: translateX(-60%);
+  }
+  100% {
+    transform: translateX(60%);
+  }
+}
+
+/* About image: normal color, premium hover float + glow */
+.about-photo {
+  transform: translateY(0);
+  transition: transform 260ms ease, box-shadow 260ms ease;
+}
+.about-float {
+  animation: about-float 5.5s ease-in-out infinite;
+}
+.about-photo::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  background:
+    radial-gradient(closest-side, rgba(var(--neon-c) / 0.42), transparent 66%),
+    radial-gradient(closest-side, rgba(var(--neon-g) / 0.34), transparent 62%);
+  filter: blur(34px);
+  opacity: 0.16;
+  transition: opacity 260ms ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.about-photo:hover {
+  transform: translateY(-10px);
+}
+.about-photo:hover::before {
+  opacity: 0.95;
+}
+
+/* keep floating even on hover; glow on hover/focus */
+.about-photo:focus-visible::before {
+  opacity: 0.95;
+}
+.about-photo:active::before {
+  opacity: 1;
+}
+.about-photo:focus-visible {
+  transform: translateY(-10px);
+}
+.about-photo:active {
+  transform: translateY(-8px);
+}
+
+/* subtle "vintage side" tilt */
+.about-vintage {
+  transform: perspective(900px) rotateY(-10deg) rotateZ(-1.5deg);
+  transform-origin: center;
+  transition: transform 260ms ease;
+}
+.about-photo:hover .about-vintage {
+  transform: perspective(900px) rotateY(-2deg) rotateZ(0deg) translateY(-2px);
+}
+
+@keyframes about-float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-float {
+    animation: none;
+  }
+  .ai-scanline {
+    animation: none;
+  }
+}
+
+/* Keep animations smooth on touch devices (less GPU-heavy). */
+@media (hover: none), (pointer: coarse) {
+  .group:hover .media-soft {
+    filter: saturate(0.98) contrast(1.03);
+    transform: none;
+  }
+  .about-photo:hover {
+    transform: none;
+  }
+  .about-photo:hover::before {
+    opacity: 0.25;
+  }
+  .about-float {
+    animation-duration: 8s;
+  }
+  .ai-scanline {
+    animation-duration: 16s;
+    opacity: 0.35;
+  }
+}
+
+/* Light mode overrides */
+html.light .Welcome-text {
+  background: linear-gradient(90.01deg, #7c3aed 0.01%, #5b21b6 50.01%, #0369a1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.light .Welcome-box {
+  box-shadow: inset 0 -7px 11px rgba(124, 58, 237, 0.12);
+}
+
+html.light .button-primary {
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.08) 0%, rgba(124, 58, 237, 0.2) 100%);
+  box-shadow: inset 0 0 12px rgba(124, 58, 237, 0.2);
+}
+
+html.light .button-primary:hover {
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.12) 0%, rgba(124, 58, 237, 0.28) 100%);
+  box-shadow: inset 0 0 12px rgba(124, 58, 237, 0.35);
+}
