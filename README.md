@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Hafiz Subhan Portfolio
 
 Frontend: **Next.js + TypeScript + Tailwind**  
@@ -65,3 +66,7 @@ uvicorn main:app --reload --host 127.0.0.1 --port 8000
 - Contact form sends messages to `hafizsubhan909@gmail.com` (configurable via backend env).
 - Chatbot is fully custom and runs on frontend (no AI backend dependency).
 - If visitor needs more detail, chatbot directs them to Contact.
+=======
+# Portfolio
+Making a portfolio website using Next.tsx, Tailwind css, Gsap, Modern colors, Better animations, cool features, custom cursor, projects listing etc
+>>>>>>> d1a6e2909c0283698a300cbb8c4a08ef26b315b4
