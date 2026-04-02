@@ -9,7 +9,8 @@ import { CONTACT_EMAIL, PROJECTS, SOCIALS } from '@/constants';
 import { MotionIn } from '@/components/motion/MotionIn';
 import { API_BASE_URL, apiUrl } from '@/lib/api';
 
-const CONTACT_REQUEST_TIMEOUT_MS = 30000;
+const CONTACT_REQUEST_TIMEOUT_MS = 70000;
+const BACKEND_WARMUP_TIMEOUT_MS = 20000;
 
 function toReadableError(value: unknown): string {
   if (!value) return '';
@@ -113,6 +114,28 @@ export function ContactPage() {
     };
   }, []);
 
+  useEffect(() => {
+    // Warm up free-tier backend so first submit is less likely to timeout.
+    const endpoint = apiUrl('/health');
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), BACKEND_WARMUP_TIMEOUT_MS);
+    fetch(endpoint, {
+      method: 'GET',
+      signal: controller.signal,
+      cache: 'no-store',
+    })
+      .catch(() => {
+        // Ignore warmup failures; submit flow still handles user-facing errors.
+      })
+      .finally(() => {
+        window.clearTimeout(timeoutId);
+      });
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeoutId);
+    };
+  }, []);
+
   const handleSubmit = async () => {
     const trimmedName = name.trim();
     const trimmedEmail = fromEmail.trim();
@@ -179,7 +202,7 @@ export function ContactPage() {
         setSubmitMessage(
           `Request timed out after ${Math.round(
             CONTACT_REQUEST_TIMEOUT_MS / 1000
-          )}s. Render free backend may be cold-starting. Please try again in a few seconds.`
+          )}s. Render free backend may be cold-starting. Please wait 10-20 seconds and try again.`
         );
       } else if (isBackendDown) {
         setSubmitMessage(`Backend is not reachable at ${API_BASE_URL}. Check NEXT_PUBLIC_API_BASE_URL.`);
