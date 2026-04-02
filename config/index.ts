@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+const SHARE_IMAGE = "https://hafiz-subhan-portfolio.vercel.app/vector.png?v=3";
+
 export const siteConfig: Metadata = {
   metadataBase: new URL("https://hafiz-subhan-portfolio.vercel.app"),
   title: "Hafiz Subhan | Hire Full-Stack Software Engineer",
@@ -45,6 +47,11 @@ export const siteConfig: Metadata = {
     "software engineer available for hire",
     "freelance full-stack developer",
     "full-stack developer for startup",
+    "google software engineer portfolio",
+    "meta software engineer portfolio",
+    "amazon software engineer portfolio",
+    "microsoft software engineer portfolio",
+    "hire me software engineer",
   ] as string[],
   authors: {
     name: "Hafiz Subhan",
@@ -62,7 +69,7 @@ export const siteConfig: Metadata = {
     type: "website",
     images: [
       {
-        url: "/vector.png",
+        url: SHARE_IMAGE,
         width: 1200,
         height: 630,
         alt: "Hafiz Subhan vector profile preview",
@@ -74,7 +81,7 @@ export const siteConfig: Metadata = {
     title: "Hafiz Subhan | Hire Full-Stack Software Engineer",
     description:
       "Hire-ready Full-Stack Software Engineer: React, Next.js, TypeScript, Python, FastAPI, and AI-integrated web applications.",
-    images: ["/vector.png"],
+    images: [SHARE_IMAGE],
   },
 } as const;
 

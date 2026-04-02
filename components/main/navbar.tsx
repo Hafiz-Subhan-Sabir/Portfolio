@@ -10,7 +10,6 @@ import { ThemeToggle } from "@/components/main/ThemeToggle";
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [showPortPreview, setShowPortPreview] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -32,12 +31,8 @@ export const Navbar = () => {
     <div className="w-full h-[72px] fixed top-0 left-0 right-0 shadow-lg shadow-black/10 dark:shadow-black/40 bg-white/80 dark:bg-[#0c0b12]/80 backdrop-blur-xl z-50 px-3 sm:px-6 lg:px-10 border-b border-gray-200/70 dark:border-white/10">
       {/* Navbar Container */}
       <div className="relative w-full h-full flex items-center justify-between m-auto px-0 sm:px-2 min-w-0 overflow-hidden">
-        {/* Logo + Name + Hover preview (stays until mouse leaves preview) */}
-        <div
-          className="relative flex items-center min-w-0 flex-1 pr-2"
-          onMouseEnter={() => setShowPortPreview(true)}
-          onMouseLeave={() => setShowPortPreview(false)}
-        >
+        {/* Logo + Name */}
+        <div className="relative flex items-center min-w-0 flex-1 pr-2">
           <Link href="#about-me" className="flex items-center min-w-0">
             <Image
               src="/vector.png"
@@ -55,21 +50,6 @@ export const Navbar = () => {
               Hafiz Subhan
             </div>
           </Link>
-          {showPortPreview && (
-            <div className="pointer-events-auto absolute left-0 top-[calc(100%+8px)] z-[60] flex flex-col items-center gap-2 rounded-2xl bg-white dark:bg-[#050016]/98 px-3 py-3 shadow-xl border border-gray-200 dark:border-[#7042f88b] dark:shadow-[#2A0E61]/60">
-              <Image
-                src="/port.png"
-                alt="Hafiz Subhan"
-                width={160}
-                height={160}
-                draggable={false}
-                className="rounded-xl object-cover"
-              />
-              <span className="text-xs text-gray-600 dark:text-gray-300 whitespace-nowrap font-medium">
-                Hafiz Subhan • Portfolio
-              </span>
-            </div>
-          )}
         </div>
 
         {/* Web Navbar */}
