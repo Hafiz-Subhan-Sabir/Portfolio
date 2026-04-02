@@ -9,6 +9,31 @@ import { CONTACT_EMAIL, PROJECTS, SOCIALS } from '@/constants';
 import { MotionIn } from '@/components/motion/MotionIn';
 import { API_BASE_URL, apiUrl } from '@/lib/api';
 
+const CONTACT_REQUEST_TIMEOUT_MS = 30000;
+
+function toReadableError(value: unknown): string {
+  if (!value) return '';
+  if (typeof value === 'string') return value;
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => toReadableError(item))
+      .filter(Boolean)
+      .join('; ');
+  }
+  if (typeof value === 'object') {
+    const obj = value as Record<string, unknown>;
+    if (typeof obj.detail === 'string') return obj.detail;
+    if (typeof obj.message === 'string') return obj.message;
+    if (Array.isArray(obj.detail)) {
+      return toReadableError(obj.detail);
+    }
+    return Object.entries(obj)
+      .map(([k, v]) => `${k}: ${toReadableError(v) || String(v)}`)
+      .join(', ');
+  }
+  return String(value);
+}
+
 function buildMailto({
   to,
   subject,
@@ -103,9 +128,12 @@ export function ContactPage() {
     setSubmitMessage('');
     try {
       const endpoint = apiUrl('/api/contact');
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), CONTACT_REQUEST_TIMEOUT_MS);
       const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
           name: trimmedName,
           email: trimmedEmail,
@@ -113,6 +141,7 @@ export function ContactPage() {
           message: trimmedMessage,
         }),
       });
+      window.clearTimeout(timeoutId);
       const contentType = res.headers.get('content-type') || '';
       const raw = await res.text();
       let data: { ok?: boolean; message?: string; detail?: string } = {};
@@ -134,7 +163,8 @@ export function ContactPage() {
         throw new Error(`Unexpected non-JSON response from ${endpoint}.`);
       }
       if (!res.ok || !data.ok) {
-        throw new Error(data.detail || data.message || 'Unable to send right now.');
+        const readable = toReadableError(data.detail) || toReadableError(data.message);
+        throw new Error(readable || 'Unable to send right now.');
       }
       setSubmitState('success');
       setSubmitMessage('Message sent successfully. I will get back to you soon.');
@@ -142,10 +172,17 @@ export function ContactPage() {
     } catch (err) {
       const msg = err instanceof Error ? err.message : '';
       const isBackendDown = msg.toLowerCase().includes('failed to fetch');
+      const isAborted = err instanceof DOMException && err.name === 'AbortError';
       const isSmtpMissing = msg.toLowerCase().includes('smtp credentials are missing');
       setSubmitState('error');
-      if (isBackendDown) {
-        setSubmitMessage(`Backend is not reachable at ${API_BASE_URL}. Start FastAPI server or update NEXT_PUBLIC_API_BASE_URL.`);
+      if (isAborted) {
+        setSubmitMessage(
+          `Request timed out after ${Math.round(
+            CONTACT_REQUEST_TIMEOUT_MS / 1000
+          )}s. Render free backend may be cold-starting. Please try again in a few seconds.`
+        );
+      } else if (isBackendDown) {
+        setSubmitMessage(`Backend is not reachable at ${API_BASE_URL}. Check NEXT_PUBLIC_API_BASE_URL.`);
       } else if (isSmtpMissing) {
         setSubmitMessage('Backend is running but SMTP is not configured. Set SMTP_USER and SMTP_PASSWORD in backend environment.');
       } else if (msg) {
