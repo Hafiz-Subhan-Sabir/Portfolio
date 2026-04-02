@@ -16,8 +16,9 @@ export default function OpenGraphImage() {
           height: "100%",
           display: "flex",
           position: "relative",
-          background:
-            "radial-gradient(circle at 25% 20%, rgba(34,197,94,0.35), transparent 45%), radial-gradient(circle at 80% 20%, rgba(34,211,238,0.28), transparent 48%), #07001f",
+          backgroundColor: "#07001f",
+          backgroundImage:
+            "radial-gradient(circle at 25% 20%, rgba(34,197,94,0.35), transparent 45%), radial-gradient(circle at 80% 20%, rgba(34,211,238,0.28), transparent 48%)",
           color: "white",
           fontFamily: "Arial, sans-serif",
         }}
