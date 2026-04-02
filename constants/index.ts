@@ -270,7 +270,7 @@ export const TESTIMONIALS = [
 ] as const;
 
 export const EDUCATION_HIGHLIGHTS = {
-  education: "BS Information Engineering Technology (2022 - 2026)",
+  education: "BS Information Engineering Technology",
   technicalSummary:
     "Technical skills applied across frontend, backend, AI workflows, and delivery-ready product builds.",
   satisfiedClients: "Satisfied Clients: 35+",
@@ -308,7 +308,7 @@ export const RESUME_DATA = {
       ],
     },
   ],
-  education: "BS Information Engineering Technology (2022 - 2026)",
+  education: "BS Information Engineering Technology",
   resumeLink: "/resume/Hafiz_Subhan_Resume.pdf",
   resumeLinkLabel: "Download Resume PDF",
   downloadIcon: RxDownload,
