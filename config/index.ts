@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 export const siteConfig: Metadata = {
   metadataBase: new URL("https://hafiz-subhan-portfolio.vercel.app"),
-  title: "Hafiz Subhan | Full-Stack Software Engineer Portfolio",
+  title: "Hafiz Subhan | Hire Full-Stack Software Engineer",
   description:
-    "Full-Stack Software Engineer portfolio of Hafiz Subhan. React, Next.js, TypeScript, Python, FastAPI, AI integrations, and production-ready web apps.",
+    "Hire Hafiz Subhan, a Full-Stack Software Engineer building production-ready React, Next.js, TypeScript, Python, and FastAPI applications with modern UI and scalable architecture.",
   icons: {
     icon: "/vector.png",
     shortcut: "/vector.png",
@@ -32,6 +32,19 @@ export const siteConfig: Metadata = {
     "rbac",
     "computer vision projects",
     "tailwindcss",
+    "hire full-stack developer",
+    "hire full-stack software engineer",
+    "hire react developer",
+    "hire next.js developer",
+    "hire typescript developer",
+    "hire python developer",
+    "hire fastapi developer",
+    "remote software engineer for hire",
+    "portfolio for job application",
+    "ats optimized portfolio",
+    "software engineer available for hire",
+    "freelance full-stack developer",
+    "full-stack developer for startup",
   ] as string[],
   authors: {
     name: "Hafiz Subhan",
@@ -41,27 +54,27 @@ export const siteConfig: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Hafiz Subhan | Full-Stack Software Engineer",
+    title: "Hafiz Subhan | Hire Full-Stack Software Engineer",
     description:
-      "Portfolio and resume-focused profile showcasing React, Next.js, TypeScript, Python, FastAPI, AI integrations, and production-ready projects.",
+      "Hire-ready portfolio showcasing React, Next.js, TypeScript, Python, FastAPI, AI integrations, and production-grade software engineering projects.",
     url: "https://hafiz-subhan-portfolio.vercel.app",
     siteName: "Hafiz Subhan Portfolio",
     type: "website",
     images: [
       {
-        url: "/port.png",
+        url: "/vector.png",
         width: 1200,
         height: 630,
-        alt: "Hafiz Subhan portfolio preview",
+        alt: "Hafiz Subhan vector profile preview",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hafiz Subhan | Full-Stack Software Engineer",
+    title: "Hafiz Subhan | Hire Full-Stack Software Engineer",
     description:
-      "React, Next.js, TypeScript, Python, FastAPI, and AI-integrated web applications.",
-    images: ["/port.png"],
+      "Hire-ready Full-Stack Software Engineer: React, Next.js, TypeScript, Python, FastAPI, and AI-integrated web applications.",
+    images: ["/vector.png"],
   },
 } as const;
 
